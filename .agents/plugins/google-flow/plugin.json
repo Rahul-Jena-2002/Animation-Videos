@@ -1,0 +1,7 @@
+{
+  "name": "google-flow",
+  "version": "0.1.0",
+  "description": "Connect Antigravity IDE to Google Flow for AI video generation (YouTube Shorts).",
+  "skills": ["skills/google-flow"],
+  "mcpServers": ["mcp_config.json"]
+}

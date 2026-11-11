@@ -1,0 +1,10 @@
+node_modules/
+dist/
+*.mp4
+*.mp3
+*.wav
+chrome-profile/
+.superpowers/
+__pycache__/
+*.pyc
+video-tools/
