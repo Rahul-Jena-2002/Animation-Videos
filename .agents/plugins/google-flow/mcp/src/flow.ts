@@ -1,6 +1,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { connectBrowser, getFlowPage, checkLoggedIn } from './browser.js';
+import { extensionBridge } from './ws-bridge.js';
 import { SEL } from './selectors.js';
 
 const OUTPUT_DIR = 'F:\\YT\\assets\\flow';
@@ -23,6 +24,17 @@ export async function generateClip(
   generating = true;
 
   try {
+    // 1. If Chrome extension is connected via WebSocket, prioritize it!
+    if (extensionBridge.isConnected()) {
+      console.log("[Flow] Using active Chrome Extension bridge...");
+      const res = await extensionBridge.sendCommand("GENERATE", { prompt, aspectRatio });
+      if (res.videoUrl) {
+        return `Video generated via Chrome Extension: ${res.videoUrl}`;
+      }
+      return "Video generation triggered on flow.google.com via Chrome Extension.";
+    }
+
+    // 2. Otherwise fall back to CDP browser session
     const browser = await connectBrowser();
     const page = await getFlowPage(browser);
 
@@ -145,3 +157,4 @@ async function interceptVideoUrl(page: import('puppeteer-core').Page): Promise<s
 function sleep(ms: number): Promise<void> {
   return new Promise(resolve => setTimeout(resolve, ms));
 }
+

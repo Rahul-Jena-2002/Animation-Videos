@@ -1,0 +1,37 @@
+{
+  "manifest_version": 3,
+  "name": "Google Flow - Antigravity Connector",
+  "version": "1.0.0",
+  "description": "Connects Google Flow (flow.google.com) to Antigravity IDE for automated AI video generation.",
+  "permissions": [
+    "storage",
+    "downloads"
+  ],
+  "host_permissions": [
+    "https://flow.google.com/*",
+    "http://127.0.0.1:*/*",
+    "ws://127.0.0.1:*/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://flow.google.com/*"
+      ],
+      "js": [
+        "content.js"
+      ],
+      "run_at": "document_idle"
+    }
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "Google Flow Antigravity Connector",
+    "default_icon": "icons/icon.png"
+  },
+  "icons": {
+    "128": "icons/icon.png"
+  }
+}

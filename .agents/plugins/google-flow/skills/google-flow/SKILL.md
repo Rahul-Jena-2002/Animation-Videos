@@ -45,3 +45,4 @@ Downloads the most recently completed clip from the active Google Flow tab.
 - **"Not logged in"** → Sign into Google in the Chrome window, then retry
 - **"Generation already in progress"** → Wait for the current clip to finish
 - **Selectors broken (Flow UI changed)** → Update `F:\YT\.agents\plugins\google-flow\mcp\src\selectors.ts` and rebuild with `npm run build`
+

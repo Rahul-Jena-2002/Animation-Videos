@@ -7,3 +7,4 @@ export const SEL = {
   videoPlayer:    'video',
   loginCheck:     'a[href*="accounts.google.com"]',
 } as const;
+

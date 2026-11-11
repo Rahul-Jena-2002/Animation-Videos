@@ -45,3 +45,4 @@ export async function checkLoggedIn(page: Page): Promise<boolean> {
     return true;
   }
 }
+
