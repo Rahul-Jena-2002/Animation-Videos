@@ -183,3 +183,4 @@ function sleep(ms) {
 // Connect automatically on page load
 connectBridge();
 setInterval(connectBridge, 5000);
+

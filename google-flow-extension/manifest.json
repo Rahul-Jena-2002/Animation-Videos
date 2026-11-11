@@ -5,7 +5,9 @@
   "description": "Connects Google Flow (flow.google.com) to Antigravity IDE for automated AI video generation.",
   "permissions": [
     "storage",
-    "downloads"
+    "downloads",
+    "scripting",
+    "tabs"
   ],
   "host_permissions": [
     "https://flow.google.com/*",
