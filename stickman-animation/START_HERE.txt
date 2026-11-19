@@ -1,0 +1,64 @@
+Stickman Hybrid: make stickman documentary explainers on any topic with Claude Code:
+clean full-colour scenes plus cut-out stickers that pop in on the spoken words
+(the style of the viral "ancient humans" and stick-figure explainer channels)
+
+Before this, set up Flow Connector: open the extension's side panel, Setup -> Copy setup
+prompt, and paste that into Claude Code.
+
+Then do ONE of these:
+
+  A) Unzip this file, open the unzipped folder in Claude Code (the Code tab of
+     the Claude desktop app, VS Code, or the terminal), and type:   start
+
+  B) In any Claude Code chat, type (do NOT attach the zip with the + button;
+     it does not take zip files, and it is not needed):
+       stickman-animation.zip is in my Downloads folder. Unzip it, read the CLAUDE.md inside and follow it.
+     If the zip is somewhere else, give its full path instead (Windows:
+     right-click the file -> "Copy as path"), or drag the file into the chat box.
+
+Claude installs everything, sets up the tools step by step (English voice on your
+computer, Hindi voice on Kaggle's free GPU), and then makes your video. Afterwards
+it works from ANY chat:
+    stickman hybrid start        a new video
+    stickman hybrid continue     carry on where you stopped
+
+You choose the topic (or ask for 10 ideas), the language and the length. Claude
+picks the look that suits the topic (bright, warm, ink, painted or night) and
+shows you three checkpoints: the script, the voice, and the final video.
+
+Good to know: the Hindi voice is made on Kaggle's free GPU. Sometimes Kaggle's
+queue is busy and the voice job waits 30 minutes to 2 hours ("QUEUED"). That is
+normal, not an error, and nothing is lost. The pictures keep going meanwhile,
+and Claude will tell you and give you options if it waits long.
+
+(Claude: read CLAUDE.md in this folder and follow it.)
+
+---
+
+Hindi / Hinglish:
+
+Pehle Flow Connector set karo: extension ka side panel kholo, Setup -> Copy setup
+prompt, aur woh Claude Code mein paste karo.
+
+Phir in dono mein se KOI EK karo:
+
+  A) Zip unzip karo, woh folder Claude Code mein kholo aur likho:   start
+
+  B) Kisi bhi Claude Code chat mein yeh likho (zip ko + button se attach
+     MAT karo):
+       Mere Downloads folder mein stickman-animation.zip hai. Use unzip karo, andar ka CLAUDE.md padho aur usme likha follow karo.
+
+Claude sab install karega, setup step-by-step karwayega (English voice aapke
+computer par, Hindi voice Kaggle ke free GPU par), phir video banayega. Uske
+baad yeh KISI BHI chat se chalega:
+    stickman hybrid start        nayi video
+    stickman hybrid continue     jahan chhoda tha wahin se
+
+Topic aap do (ya 10 idea maango), bhasha aur length bhi aap chuno. Look (bright,
+warm, ink, painted, night) Claude topic ke hisaab se chunega. Aapko sirf teen
+cheezein dikhayi jayengi: script, awaaz, aur final video.
+
+Ghabraiye mat: Hindi awaaz Kaggle ke free GPU par banti hai. Kabhi-kabhi Kaggle
+ki queue busy hoti hai aur job 30 minute se 2 ghante tak "QUEUED" dikhata hai.
+Yeh normal hai, koi error nahi, kuch kharab nahi hua. Tab tak pictures ka kaam
+chalta rehta hai, aur zyada der ho to Claude aapko bata kar options dega.

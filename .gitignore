@@ -8,3 +8,7 @@ chrome-profile/
 __pycache__/
 *.pyc
 video-tools/
+
+# Generated animation renders and frame output
+out/
+
