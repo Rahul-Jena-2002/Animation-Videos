@@ -101,7 +101,11 @@ export const ManhwaScene: React.FC<{
     pointerEvents: "none",
   });
 
-  // Staging for manhwa characters: horizon = 780
+  // Staging for manhwa characters on widescreen 16:9 altar stage (horizon at Y=780)
+  const stageManhwa = {
+    y: (z: number) => 870 + clamp(z, 0, 1) * 110,
+    s: (z: number) => 0.72 + clamp(z, 0, 1) * 0.35,
+  };
   const actorStates = resolveActors(shot, { horizon: 740 } as never, frame, dur);
 
   return (
@@ -143,26 +147,31 @@ export const ManhwaScene: React.FC<{
           const ch = cast[st.a.id];
           if (!ch && st.a.id !== "morrow") return null;
 
+          const charY = stageManhwa.y(st.a.z) - 35 + st.yOff;
+          const charScale = stageManhwa.s(st.a.z) * st.sMul;
+
           if (st.a.id === "morrow") {
+            const foxScale = charScale * 1.55;
             return (
               <div
                 key="morrow"
                 style={{
                   position: "absolute",
-                  left: `${st.x}px`,
-                  top: `${st.y}px`,
+                  left: `${st.x - 120 * foxScale}px`,
+                  top: `${charY - 40 - 140 * foxScale}px`,
                   transformOrigin: "center bottom",
                   opacity: st.opacity,
+                  pointerEvents: "none",
                 }}
               >
                 {/* Fox floor shadow */}
                 <div
                   style={{
                     position: "absolute",
-                    left: "-50px",
-                    bottom: "-4px",
-                    width: "100px",
-                    height: "16px",
+                    left: `${70 * foxScale}px`,
+                    bottom: `${10 * foxScale}px`,
+                    width: `${110 * foxScale}px`,
+                    height: `${22 * foxScale}px`,
                     borderRadius: "50%",
                     backgroundColor: "rgba(10, 5, 20, 0.65)",
                     filter: "blur(4px)",
@@ -172,7 +181,7 @@ export const ManhwaScene: React.FC<{
                   frame={frame}
                   pose={st.pose}
                   facing={st.facing}
-                  scale={st.s * 1.05}
+                  scale={foxScale}
                 />
               </div>
             );
@@ -183,19 +192,21 @@ export const ManhwaScene: React.FC<{
               key={st.a.id || i}
               style={{
                 position: "absolute",
-                left: `${st.x}px`,
-                top: `${st.y}px`,
-                transform: `scale(${st.s})`,
+                left: `${st.x - 250 * charScale}px`,
+                top: `${charY - 500 * charScale}px`,
+                width: `${500 * charScale}px`,
+                height: `${600 * charScale}px`,
                 transformOrigin: "center bottom",
                 opacity: st.opacity,
+                pointerEvents: "none",
               }}
             >
               {/* Floor contact reflection shadow */}
               <div
                 style={{
                   position: "absolute",
-                  left: "-45px",
-                  bottom: "-6px",
+                  left: "205px",
+                  bottom: "94px",
                   width: "90px",
                   height: "18px",
                   borderRadius: "50%",
@@ -203,37 +214,29 @@ export const ManhwaScene: React.FC<{
                   filter: "blur(4px)",
                 }}
               />
-              <Character
-                ch={ch}
-                id={st.a.id}
-                pose={st.pose}
-                prevPose={st.prevPose}
-                poseT={st.poseAge / 6}
-                expression={st.expression}
-                exprAge={st.exprAge}
-                facing={st.facing}
-                talking={Boolean(st.a.talking)}
-                t={frame / fps}
-                frame={frame}
-                walking={st.walking}
-                light={{ side: st.facing === "right" ? 1 : -1, color: "#8be9fd", strength: 0.8 }}
-                held={st.a.id === "seraphine" ? <SeraphineBlade frame={frame} /> : undefined}
-              />
-              {/* Overlay Kael's glowing constellation tattoo on arm */}
-              {st.a.id === "kael" && (
-                <div
-                  style={{
-                    position: "absolute",
-                    left: st.facing === "left" ? "-48px" : "18px",
-                    top: "-155px",
-                    pointerEvents: "none",
-                  }}
-                >
-                  <svg width="60" height="120" viewBox="0 0 60 120">
-                    <KaelGlyphs frame={frame} side={st.facing === "left" ? -1 : 1} />
-                  </svg>
-                </div>
-              )}
+              <svg
+                width="100%"
+                height="100%"
+                viewBox="-250 -500 500 600"
+                style={{ overflow: "visible" }}
+              >
+                <Character
+                  ch={ch}
+                  id={st.a.id}
+                  pose={st.pose}
+                  prevPose={st.prevPose}
+                  poseT={st.poseAge / 6}
+                  expression={st.expression}
+                  exprAge={st.exprAge}
+                  facing={st.facing}
+                  talking={Boolean(st.a.talking)}
+                  t={frame / fps}
+                  frame={frame}
+                  walking={st.walking}
+                  light={{ side: st.facing === "right" ? 1 : -1, color: "#8be9fd", strength: 0.8 }}
+                  held={st.a.id === "seraphine" ? <SeraphineBlade frame={frame} /> : undefined}
+                />
+              </svg>
             </div>
           );
         })}
