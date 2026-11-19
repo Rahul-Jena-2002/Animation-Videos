@@ -5,6 +5,8 @@ import type { ResolvedShot, Character as CharDef } from "../schema";
 import { Character } from "../character/Character";
 import { AtmosphericParticles } from "./AtmosphericParticles";
 import { resolveActors } from "./Scene";
+import { MorrowFox } from "../character/MorrowFox";
+import { KaelGlyphs, SeraphineBlade } from "../character/ManhwaEnhancements";
 
 export type ParallaxPlane = {
   x: number;
@@ -139,7 +141,43 @@ export const ManhwaScene: React.FC<{
       >
         {actorStates.map((st, i) => {
           const ch = cast[st.a.id];
-          if (!ch) return null;
+          if (!ch && st.a.id !== "morrow") return null;
+
+          if (st.a.id === "morrow") {
+            return (
+              <div
+                key="morrow"
+                style={{
+                  position: "absolute",
+                  left: `${st.x}px`,
+                  top: `${st.y}px`,
+                  transformOrigin: "center bottom",
+                  opacity: st.opacity,
+                }}
+              >
+                {/* Fox floor shadow */}
+                <div
+                  style={{
+                    position: "absolute",
+                    left: "-50px",
+                    bottom: "-4px",
+                    width: "100px",
+                    height: "16px",
+                    borderRadius: "50%",
+                    backgroundColor: "rgba(10, 5, 20, 0.65)",
+                    filter: "blur(4px)",
+                  }}
+                />
+                <MorrowFox
+                  frame={frame}
+                  pose={st.pose}
+                  facing={st.facing}
+                  scale={st.s * 1.05}
+                />
+              </div>
+            );
+          }
+
           return (
             <div
               key={st.a.id || i}
@@ -178,8 +216,24 @@ export const ManhwaScene: React.FC<{
                 t={frame / fps}
                 frame={frame}
                 walking={st.walking}
-                light={{ side: st.facing === "right" ? 1 : -1, color: "#8be9fd", strength: 0.7 }}
+                light={{ side: st.facing === "right" ? 1 : -1, color: "#8be9fd", strength: 0.8 }}
+                held={st.a.id === "seraphine" ? <SeraphineBlade frame={frame} /> : undefined}
               />
+              {/* Overlay Kael's glowing constellation tattoo on arm */}
+              {st.a.id === "kael" && (
+                <div
+                  style={{
+                    position: "absolute",
+                    left: st.facing === "left" ? "-48px" : "18px",
+                    top: "-155px",
+                    pointerEvents: "none",
+                  }}
+                >
+                  <svg width="60" height="120" viewBox="0 0 60 120">
+                    <KaelGlyphs frame={frame} side={st.facing === "left" ? -1 : 1} />
+                  </svg>
+                </div>
+              )}
             </div>
           );
         })}
